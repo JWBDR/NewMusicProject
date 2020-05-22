@@ -84,19 +84,15 @@
                     player.music.pause();
 
                     player.pro.stop();//暂停停止定时器(原点)
-
                     this.className = '';
                     self.imgStop();
                 } else {
                     player.music.play();
-
                     player.pro.start();//定时器
                     clearInterval(self.rotateTimer)
-
                     this.className = 'playing';
                     var deg = self.record.dataset.rotate || 0;//第一次没有data-rotate,兼容为0；
                     self.imgRotate(deg);//播放时候旋转图片
-
                 }
 
             })
@@ -129,7 +125,7 @@
         },
         listPlay: function () {//列表切歌
             var self = this;
-            console.log(player.listControl)
+            // console.log(player.listControl)
             this.list = player.listControl(this.dataList, this.wrap);//给this.list赋值return的(dd)
 
             //列表按钮
@@ -171,11 +167,10 @@
             }).on('touchmove', function (e) {
                 var x = e.changedTouches[0].clientX;//第0个手指；点的左边的距离
                 var per = (x - left) / width;//点距离所占百分比
-                console.log(left)
                 // console.log(per)
 
                 if (0 < per && per < 1) {
-                    player.pro.upDate(per);//
+                    player.pro.upDate(per);
                 }
             }).on('touchend', function (e) {
                 var x = e.changedTouches[0].clientX;
@@ -186,7 +181,9 @@
                     var curTime = per * self.dataList[self.indexObj.index].duration;
                     player.music.playTo(curTime);//更新时间
                     player.music.status = 'play';//更新状态
+                    //直接拉动进度条时播放
                     player.music.play();
+                    player.pro.start(per);
 
                     // console.log($('li:nth-child(3)'))
                     $('.play').addClass('playing');

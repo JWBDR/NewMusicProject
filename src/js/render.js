@@ -2,7 +2,7 @@
 (function (root) {
     //渲染图片
     function renderImg(src) {
-        // root.blurImg(src);//第二个参数默认是body
+        root.blurImg(src);//第二个参数默认是body
         var img = document.querySelector(".songImg img");
         img.src = src;
     }

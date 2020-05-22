@@ -11,6 +11,7 @@
         },
         play:function() {
             //播放
+            
             this.audio.play();
             this.status = 'play';
             console.log('play')
